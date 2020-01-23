@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+<style>
+h1{
+  background:pink;
+}
+div{
+  background:pink
+}
+li{
+  background:pink
+}
+.correct{
+  background:green;
+}
+ 
+.incorrect{
+  background:red;
+}
+</style>
+</head>
+<body translate="no">
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<audio controls id="sad">
+<source src="https://math.seattleacademy.org/garyanderson/snd/sad.mp3" type="audio/mpeg">
+Your browser does not support the audio tag
+</audio>
+<h1> Anna's groovy list o problems </h1>
+<div>Timer: <span id="theTime">0 </span> Score: <span id="score">0</spiv></div>
+<ol>
+<ol>
+<li>\( 2^3 \) <input data-correct="8"></li>
+<li>\( \sqrt[3]{8} \) <input data-correct="2"></li>
+<li>\(8^{\frac{1}{3}} \) <input data-correct="2"> </li>
+<li>\( (\frac{-125}{27})^\tfrac{-2}{3} \) <input data-correct="9/25" /></li>
+<li>\( 12^3 \) <input data-correct="1728" /></li>
+<li>\( 14^2 \) <input data-correct="196" /></li>
+<li>\(400*9 \) <input data-correct="3600" /></li>
+<li>\( \sqrt{150} \) <input data-correct="5 sqrt{6}" /></li>
+<li>\(\frac{100}{15}\) <input data-correct=" 20/3" /></li>
+<li>\(3+17 \) <input data-correct="20" /></li>
+</ol>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script id="rendered-js">
+console.clear();
+const sad = document.getElementById("sad");
+setInterval(upTime, 1000);
+
+function upTime() {
+  let theTime = Number($("#theTime").text());
+  theTime = theTime + 1;
+  $("#theTime").text(theTime);
+}
+$("input").change(onChange);
+
+function onChange(evt) {
+  let correct = $(this).data("correct");
+  let response = $(this).val();
+
+  if (correct == response) {
+    $(this)
+      .removeClass("incorrect")
+      .addClass("correct");
+    let theScore = Number($("#score").text());
+    theScore = theScore + 1;
+    $("#score").text(theScore);
+  } else {
+    if (Math.random() > 0.9) {
+      sad.play();
+    }
+    $(this)
+      .removeClass("correct")
+      .addClass("incorrect");
+  }
+}
+    </script>
+</body>
+</html>
